@@ -4,7 +4,7 @@ function NavBar() {
 
     return (
         <nav>
-            <NavLink to={"/home"}>Home</NavLink>
+            <NavLink to={"/"}>Home</NavLink>
             <NavLink>Items</NavLink>
             <NavLink to={"/auth"}>Register</NavLink>
             <NavLink>Login</NavLink>
