@@ -1,4 +1,6 @@
 import { useGetItemsQuery } from "../../redux/api";
+import ItemsCard from "./ItemsCard";
+
 
 function ItemList() {
     const { data = {}, error, isLoading } = useGetItemsQuery;
@@ -11,13 +13,14 @@ function ItemList() {
         return <h3>{error.data.message}</h3>;
     }
 
+    console.log("data", data.items);
     return (
         <section>
             <h2>Date Ideas</h2>
             <div>
-                {data && data.items.map((item) => {
-                    <ItemCard key={item.id} item={item} />
-                })}
+                {data.items && data.items.map((items) => (
+                    <ItemsCard key={items.id} items={items} />
+                ))}
             </div>
         </section>
     );
