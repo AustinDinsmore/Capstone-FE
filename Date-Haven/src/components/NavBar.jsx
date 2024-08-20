@@ -5,11 +5,11 @@ function NavBar() {
     return (
         <nav>
             <NavLink to={"/"}>Home</NavLink>
-            <NavLink>Items</NavLink>
-            <NavLink to={"/auth"}>Register</NavLink>
-            <NavLink>Login</NavLink>
+            <NavLink to={"/items"}>Items</NavLink>
+            <NavLink to={"/register"}>Register</NavLink>
+            <NavLink to={"/login"}>Login</NavLink>
         </nav>
     )
-}
+};
 
 export default NavBar;

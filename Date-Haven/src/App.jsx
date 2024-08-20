@@ -3,17 +3,19 @@ import Home from "./components/Home";
 import AuthForm from "./components/AuthForm";
 import NavBar from "./components/NavBar";
 import './App.css'
+import { useState } from "react";
+import ItemList from "./components/Items";
 
 function App() {
-
+  const [token, setToken] = useState(null);
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/items" /> */}
-        <Route path="/register" element={<AuthForm />} />
-        <Route path="/login" element={<AuthForm />} />
+        <Route path="/items" element={<ItemList />} />
+        <Route path="/register" element={<AuthForm setToken={setToken} />} />
+        <Route path="/login" element={<AuthForm setToken={setToken} />} />
       </Routes>
     </div>
   )
