@@ -26,8 +26,14 @@ export const dates_api = createApi({
                 url: "/api/items/",
                 method: "GET",
             })
+        }),
+        getItem: builder.query ({
+            query: (id) => ({
+                url: `/api/items/${id}`,
+                method: "GET",
+            })
         })
     })
 })
 
-export const {useRegisterMutation, useLoginMutation, useGetItemsQuery} = dates_api;
+export const {useRegisterMutation, useLoginMutation, useGetItemsQuery, useGetItemQuery} = dates_api;
