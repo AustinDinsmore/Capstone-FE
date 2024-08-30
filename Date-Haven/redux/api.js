@@ -32,7 +32,13 @@ export const dates_api = createApi({
                 url: `/api/items/${id}`,
                 method: "GET",
             })
-        })
+        }),
+        // getItemReviews: builder.query ({
+        //     query: (item_id) => ({
+        //         url: `/api/${item_id}/reviews`,
+        //         method: "GET",
+        //     })
+        // })
     })
 })
 
