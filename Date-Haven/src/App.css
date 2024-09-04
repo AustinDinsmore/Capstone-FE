@@ -5,22 +5,30 @@
   text-align: center;
 }
 
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 img {
   width: 450px;
   height: 450px;
+}
+
+nav {
+  display: flex;
+  justify-content: right;
+  position: fixed;
+  top: 0px;
+  right: 24px;
+  width: 100%;
+  background-color: aqua;
+}
+
+nav>a {
+  margin: 0 12px;
+}
+
+nav>a:hover {
+  text-decoration: underline;
+}
+
+.item_card {
+  border: 1px solid red;
+  border-radius: 5%;
 }

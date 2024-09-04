@@ -30,11 +30,12 @@ function ItemList() {
             <h2>Date Ideas</h2>
             {isLoading ? <p>Loading...</p> : <span />}
             {error ? <p>Ooops! Something went wrong!</p> : <span />}
-            <div className="item_card">
-                {data.allItems && data.allItems.map((items) => (
+            {data.allItems && data.allItems.map((items) => (
+                <div className="item_card" key={data.allItems.id}>
                     <ItemsCard key={items.id} items={items} />
-                ))}
-            </div>
+                </div>
+            ))}
+
         </section>
     );
 }
