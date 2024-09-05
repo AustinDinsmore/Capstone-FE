@@ -23,6 +23,8 @@ function ItemDetail() {
         return <h3>{error.data.message}</h3>;
     }
 
+
+
     if (items) {
         const { img_url, name, description } = items;
         return (
@@ -30,25 +32,22 @@ function ItemDetail() {
                 <h2>{name}</h2>
                 <img src={img_url || date} />
                 <h3>{description}</h3>
-                {/* button with view button
-                then map through reviews and comments when button is clicked */}
-                <div>
-                    {data.itemId.reviews && data.itemId.reviews.map((a) => {
-                        return (
-                            <div>
-                                <p>Review</p>
-                                <p>{a.txt}</p>
-                                <p>{a.score}</p>
-                                {a.comments.map((b) => {
-                                    return (
-                                        <p>Comment: {b.comment}</p>
-                                    )
-                                })}
-                            </div>
-                        )
-                    })}
-                </div>
-
+                {!viewComments && (<div>
+                    <button onClick={() => setViewComments(!viewComments)}>View Comments</button>
+                </div>)}
+                {viewComments && data.itemId.reviews && data.itemId.reviews.map((a) => {
+                    return (
+                        <div key={a.id}>
+                            <p>Review: {a.txt}</p>
+                            <p>Rating: {a.score}</p>
+                            {a.comments.map((b) => {
+                                return (
+                                    <p key={b.id}>Comment: {b.comment}</p>
+                                )
+                            })}
+                        </div>
+                    )
+                })}
             </section>
 
         );

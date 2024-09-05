@@ -31,7 +31,7 @@ function ItemList() {
             {isLoading ? <p>Loading...</p> : <span />}
             {error ? <p>Ooops! Something went wrong!</p> : <span />}
             {data.allItems && data.allItems.map((items) => (
-                <div className="item_card" key={data.allItems.id}>
+                <div className="item_card" key={items.id}>
                     <ItemsCard key={items.id} items={items} />
                 </div>
             ))}

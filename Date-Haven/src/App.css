@@ -17,7 +17,7 @@ nav {
   top: 0px;
   right: 24px;
   width: 100%;
-  background-color: aqua;
+  background-color: #787B79;
 }
 
 nav>a {
@@ -26,9 +26,10 @@ nav>a {
 
 nav>a:hover {
   text-decoration: underline;
+  color: #524741;
 }
 
 .item_card {
-  border: 1px solid red;
+  border: 1px solid #252729;
   border-radius: 5%;
 }

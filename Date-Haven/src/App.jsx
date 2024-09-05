@@ -11,7 +11,7 @@ function App() {
   const [token, setToken] = useState(null);
   return (
     <div>
-      <NavBar />
+      <NavBar token={token} setToken={setToken} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/items" element={<ItemList />} />

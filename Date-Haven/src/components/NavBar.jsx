@@ -1,6 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-function NavBar() {
+function NavBar({ token, setToken }) {
+    const navigate = useNavigate();
+
+    const logoutUser = () => {
+        setToken(null);
+        navigate("/");
+    }
+
+    if (token) {
+        return (
+            <nav>
+                <NavLink to={"/"}>Home</NavLink>
+                <NavLink to={"/items"}>Items</NavLink>
+                <a onClick={logoutUser}>Logout</a>
+            </nav>
+        );
+    }
 
     return (
         <nav>
