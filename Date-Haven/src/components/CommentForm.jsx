@@ -30,9 +30,10 @@ function CommentForm() {
             <form>
                 <label>
                     Comment:
-                    <input name="comment" value={comments.comment} />
+                    <input name="comment" />
                 </label>
-
+                <br />
+                <button onClick={handleSubmit}>Submit</button>
             </form>
         </div>
     )
