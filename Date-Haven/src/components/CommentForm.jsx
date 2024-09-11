@@ -11,10 +11,27 @@ function CommentForm() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        if (form.comment === "") {
+            setError("Please provide a title and a rating");
+            return;
+        }
+
+        if (error) {
+            setError(error.data.message);
+            return;
+        }
+    };
+
     return (
         <div>
             <h2>Create New Comment</h2>
             <form>
+                <label>
+                    Comment:
+                    <input name="comment" value={comments.comment} />
+                </label>
 
             </form>
         </div>
