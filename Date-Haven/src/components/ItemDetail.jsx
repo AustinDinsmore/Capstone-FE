@@ -54,6 +54,8 @@ function ItemDetail() {
                     )
                 })}
                 <button onClick={handleSubmit}>Create Review</button>
+                <br />
+                <button>Create Comment</button>
             </section>
         );
     }
