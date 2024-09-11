@@ -33,13 +33,47 @@ export const dates_api = createApi({
                 method: "GET",
             })
         }),
-        // getItemReviews: builder.query ({
-        //     query: (item_id) => ({
-        //         url: `/api/${item_id}/reviews`,
-        //         method: "GET",
-        //     })
-        // })
+        createReview: builder.mutation ({
+            query: ({body, id}) => ({
+                url: `/api/review/${id}`,
+                method: "POST",
+                body,
+            })
+        }),
+        updateReview: builder.mutation ({
+            query: ({body, id}) => ({
+                url: `/api/review/${id}`,
+                method: "PUT",
+                body,
+            })
+        }),
+        deleteReview: builder.mutation ({
+            query: (id) => ({
+                url: `/api/review/${id}`,
+                method: "DELETE",
+            })
+        }),
+        createComment: builder.mutation ({
+            query: ({body, id}) => ({
+                url: `/api/comment/${id}`,
+                method: "POST",
+                body,
+            })
+        }),
+        updateComment: builder.mutation ({
+            query: ({body, id}) => ({
+                url: `/api/comment/${id}`,
+                method: "PUT",
+                body,
+            })
+        }),
+        deleteComment: builder.mutation({
+            query: (id) => ({
+                url: `/api/comment/${id}`,
+                method: "DELETE"
+            })
+        })
     })
 })
 
-export const {useRegisterMutation, useLoginMutation, useGetItemsQuery, useGetItemQuery} = dates_api;
+export const {useRegisterMutation, useLoginMutation, useGetItemsQuery, useGetItemQuery, useCreateReviewMutation, useUpdateReviewMutation, useDeleteReviewMutation, useCreateCommentMutation, useUpdateCommentMutation, useDeleteCommentMutation} = dates_api;

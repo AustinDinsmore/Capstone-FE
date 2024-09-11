@@ -8,8 +8,9 @@ function ItemDetail() {
     const { id } = useParams();
     const { data, error, isLoading } = useGetItemQuery(id);
     const [viewComments, setViewComments] = useState(false);
+    const navigate = useNavigate();
 
-    let items;
+    let items = {};
 
     if (data) {
         items = data.itemId;
@@ -23,6 +24,10 @@ function ItemDetail() {
         return <h3>{error.data.message}</h3>;
     }
 
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        navigate(`/review/${id}`, { state: { items } });
+    }
 
 
     if (items) {
@@ -48,8 +53,9 @@ function ItemDetail() {
                         </div>
                     )
                 })}
+                <button onClick={handleSubmit}>Create Review</button>
+                <button></button>
             </section>
-
         );
     }
 }

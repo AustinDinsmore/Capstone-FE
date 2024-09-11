@@ -6,6 +6,8 @@ import './App.css'
 import { useState } from "react";
 import ItemList from "./components/Items";
 import ItemDetail from "./components/ItemDetail";
+import ReviewForm from "./components/ReviewForm";
+import CommentForm from "./components/CommentForm";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -18,9 +20,11 @@ function App() {
         <Route path="/register" element={<AuthForm setToken={setToken} />} />
         <Route path="/login" element={<AuthForm setToken={setToken} />} />
         <Route path="/item/:id" element={<ItemDetail />} />
+        <Route path="/review/:id" element={<ReviewForm token={token} setToken={setToken} />} />
+        <Route path="/comment/:id" element={<CommentForm token={token} setToken={setToken} />} />
       </Routes>
     </div>
   )
-}
+};
 
 export default App

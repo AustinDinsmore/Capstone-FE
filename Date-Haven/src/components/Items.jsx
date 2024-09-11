@@ -6,7 +6,7 @@ import ItemDetail from "./ItemDetail";
 
 function ItemList() {
     const { data = {}, error, isLoading } = useGetItemsQuery();
-    const { itemSelected, setItemSelected } = useState();
+    const [itemSelected, setItemSelected] = useState(null);
 
     if (isLoading) {
         return <p>Loading...</p>;
