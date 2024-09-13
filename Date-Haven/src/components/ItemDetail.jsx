@@ -29,6 +29,10 @@ function ItemDetail() {
         navigate(`/review/${id}`, { state: { items } });
     }
 
+    const newComment = async (review_id) => {
+
+        navigate(`/comment/${review_id}/${id}`, { state: { items } });
+    }
 
     if (items) {
         const { img_url, name, description } = items;
@@ -45,6 +49,7 @@ function ItemDetail() {
                         <div key={a.id}>
                             <p>Review: {a.txt}</p>
                             <p>Rating: {a.score}</p>
+                            <button onClick={() => newComment(a.id)}>Create Comment</button>
                             {a.comments.map((b) => {
                                 return (
                                     <p key={b.id}>Comment: {b.comment}</p>
@@ -55,7 +60,6 @@ function ItemDetail() {
                 })}
                 <button onClick={handleSubmit}>Create Review</button>
                 <br />
-                <button>Create Comment</button>
             </section>
         );
     }

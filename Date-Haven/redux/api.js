@@ -4,7 +4,8 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 export const dates_api = createApi({
     reducerPath: "dates_api",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://date-haven.onrender.com",
+        // baseUrl: "https://date-haven.onrender.com",
+        baseUrl: "http://localhost:8080",
     }),
     endpoints: (builder) => ({
         register: builder.mutation({
@@ -34,9 +35,12 @@ export const dates_api = createApi({
             })
         }),
         createReview: builder.mutation ({
-            query: ({body, id}) => ({
+            query: ({body, id, token}) => ({
                 url: `/api/review/${id}`,
                 method: "POST",
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
                 body,
             })
         }),
@@ -54,9 +58,12 @@ export const dates_api = createApi({
             })
         }),
         createComment: builder.mutation ({
-            query: ({body, id}) => ({
-                url: `/api/comment/${id}`,
+            query: ({body, review_id, token}) => ({
+                url: `/api/comment/${review_id}`,
                 method: "POST",
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
                 body,
             })
         }),

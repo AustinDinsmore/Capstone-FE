@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useCreateReviewMutation, useDeleteReviewMutation, useUpdateReviewMutation } from "../../redux/api";
 
 function ReviewForm({ token, setToken, items }) {
     const initialForm = {
         txt: "",
-        score: "",
+        score: 0,
     };
-    console.log(items)
+
+    const { id } = useParams();
     const [createReview] = useCreateReviewMutation();
     const [updateReview] = useUpdateReviewMutation();
     const [deleteReview] = useDeleteReviewMutation();
@@ -29,19 +30,23 @@ function ReviewForm({ token, setToken, items }) {
             return;
         }
 
+        updateForm({ ...form, score: parseFloat(form.score) });
+
         const { error } = items
-            ? await updateReview({ token, body: form, id: items_id })
-            : await createReview({ token, body: form })
+            ? await updateReview({ token, body: form, id })
+            : await createReview({ token, body: form, id })
 
         if (error) {
             setError(error.data.message);
             return;
         }
+        navigate(`/item/${id}`);
     };
 
     return (
         <div>
             <h2>Create New Review</h2>
+            {error ? <p>Please provide a title and a rating!</p> : <span />}
             <form>
                 <label>
                     Title:
@@ -50,11 +55,11 @@ function ReviewForm({ token, setToken, items }) {
                 <br />
                 <label>
                     Rating:
-                    <input name="score" type="number" value={location.state.items.reviews.score} min={1} max={5} onChange={handleChange} />
+                    <input name="score" type="number" step={0.5} value={location.state.items.reviews.score} min={1} max={5} onChange={handleChange} />
                 </label>
                 <br />
                 <button onClick={handleSubmit}>Create</button>
-                {console.log(location.state.items.reviews)}
+
             </form>
         </div>
     )

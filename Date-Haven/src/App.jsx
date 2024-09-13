@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" element={<AuthForm setToken={setToken} />} />
         <Route path="/item/:id" element={<ItemDetail />} />
         <Route path="/review/:id" element={<ReviewForm token={token} setToken={setToken} />} />
-        <Route path="/comment/:id" element={<CommentForm token={token} setToken={setToken} />} />
+        <Route path="/comment/:review_id/:id" element={<CommentForm token={token} setToken={setToken} />} />
       </Routes>
     </div>
   )
