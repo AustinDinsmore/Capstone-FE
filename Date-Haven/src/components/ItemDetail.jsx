@@ -2,18 +2,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import date from "../img/soop-kim-7Nyt3uDKKSo-unsplash.jpg";
 import { useGetItemQuery } from "../../redux/api";
+import ReviewForm from "./ReviewForm";
+import CommentForm from "./CommentForm";
 
 
-function ItemDetail() {
+function ItemDetail({ token, setItemSelected }) {
     const { id } = useParams();
     const { data, error, isLoading } = useGetItemQuery(id);
     const [viewComments, setViewComments] = useState(false);
+    const [reviewEdit, setReviewEdit] = useState(null);
+    const [commentEdit, setCommentEdit] = useState(null);
     const navigate = useNavigate();
-
-    let items = {};
+    let item = {};
+    let review = {};
 
     if (data) {
-        items = data.itemId;
+        item = data.itemId;
     }
 
     if (isLoading) {
@@ -24,45 +28,67 @@ function ItemDetail() {
         return <h3>{error.data.message}</h3>;
     }
 
+    if (item) {
+        review = item.reviews.id;
+    }
+
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        navigate(`/review/${id}`, { state: { items } });
+        navigate(`/review/${id}`);
     }
 
     const newComment = async (review_id) => {
-
-        navigate(`/comment/${review_id}/${id}`, { state: { items } });
+        navigate(`/comment/${review_id}/${id}`, { state: { item } });
     }
 
-    if (items) {
-        const { img_url, name, description } = items;
+    if (reviewEdit) {
         return (
-            <section>
-                <h2>{name}</h2>
-                <img src={img_url || date} />
-                <h3>{description}</h3>
-                {!viewComments && (<div>
-                    <button onClick={() => setViewComments(!viewComments)}>View Comments</button>
-                </div>)}
-                {viewComments && data.itemId.reviews && data.itemId.reviews.map((a) => {
-                    return (
-                        <div key={a.id}>
-                            <p>Review: {a.txt}</p>
-                            <p>Rating: {a.score}</p>
-                            <button onClick={() => newComment(a.id)}>Create Comment</button>
-                            {a.comments.map((b) => {
-                                return (
-                                    <p key={b.id}>Comment: {b.comment}</p>
-                                )
-                            })}
-                        </div>
-                    )
-                })}
-                <button onClick={handleSubmit}>Create Review</button>
-                <br />
-            </section>
+            <ReviewForm review={reviewEdit} token={token} setReviewEdit={setReviewEdit} />
         );
     }
-}
+
+    if (commentEdit) {
+        return (
+            <CommentForm comment={commentEdit} token={token} setCommentEdit={setCommentEdit} />
+        );
+    }
+
+    const { name, description } = item;
+
+    return (
+        <section>
+            <button onClick={() => setItemSelected(false)}>Back</button>
+            <h2>{name}</h2>
+            <img src={date} />
+            <h3>{description}</h3>
+            {!viewComments && (<div>
+                <button onClick={() => setViewComments(!viewComments)}>View Comments</button>
+            </div>)}
+            {viewComments && item.reviews && item.reviews.map((review) => {
+                return (
+                    <div key={review.id}>
+                        <p>Review: {review.txt}</p>
+                        <p>Rating: {review.score}</p>
+                        <button onClick={() => setReviewEdit(review)}>Edit Review</button>
+                        <br />
+                        <button onClick={() => newComment(review.id)}>Create Comment</button>
+                        {review.comments.map((comment) => {
+                            return (
+                                <div key={comment.id}>
+                                    <p>Comment: {comment.comment}</p>
+                                    <br />
+                                    <button onClick={() => setCommentEdit(comment)}>Edit Comment</button>
+                                </div>
+                            )
+                        })}
+
+                    </div>
+                )
+            })}
+            <button onClick={handleSubmit}>Create Review</button>
+            <br />
+        </section>
+    );
+};
 
 export default ItemDetail;

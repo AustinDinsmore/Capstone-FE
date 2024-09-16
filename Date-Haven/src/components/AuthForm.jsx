@@ -51,10 +51,12 @@ function AuthForm({ setToken }) {
                     Username
                     <input name="username" value={username} onChange={handleChange} />
                 </label>
+                <br />
                 <label>
                     Password
                     <input type={!showPassword ? "password" : "text"} name="password" value={password} onChange={handleChange} />
                 </label>
+                <br />
                 <button onClick={handleSubmit}>
                     {isRegister ? "Register" : "Login"}
                 </button>

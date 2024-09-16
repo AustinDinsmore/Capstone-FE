@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useCreateCommentMutation, useUpdateCommentMutation, useDeleteCommentMutation } from "../../redux/api";
 
-function CommentForm({ token, setToken, reviews }) {
+function CommentForm({ token, reviews, comment, setCommentEdit }) {
+    console.log(comment);
     const initialForm = {
-        comment: "",
+        comment: comment?.comment || "",
     };
 
     const { review_id, id } = useParams();
-    console.log(review_id)
     const [createComment] = useCreateCommentMutation();
     const [updateComment] = useUpdateCommentMutation();
     const [deleteComment] = useDeleteCommentMutation();
@@ -39,12 +39,16 @@ function CommentForm({ token, setToken, reviews }) {
             return;
         }
 
+        if (comment) {
+            setCommentEdit(false);
+        }
+
         navigate(`/item/${id}`);
     };
-    console.log(location.state.items.reviews.comments)
+
     return (
         <div>
-            <h2>Create New Comment</h2>
+            <h2>{comment ? "Update Comment" : "Create New Comment"}</h2>
             {error ? <p>Please provide a comment!</p> : <span />}
             <form>
                 <label>
@@ -52,7 +56,7 @@ function CommentForm({ token, setToken, reviews }) {
                     <input name="comment" value={form.comment} onChange={handleChange} />
                 </label>
                 <br />
-                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleSubmit}>{comment ? "Update" : "Submit"}</button>
             </form>
         </div>
     )

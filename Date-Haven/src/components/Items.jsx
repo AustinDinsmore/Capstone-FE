@@ -6,7 +6,7 @@ import ItemDetail from "./ItemDetail";
 
 function ItemList() {
     const { data = {}, error, isLoading } = useGetItemsQuery();
-    const [itemSelected, setItemSelected] = useState(null);
+    const [itemSelected, setItemSelected] = useState(false);
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -32,7 +32,7 @@ function ItemList() {
             {error ? <p>Ooops! Something went wrong!</p> : <span />}
             {data.allItems && data.allItems.map((items) => (
                 <div className="item_card" key={items.id}>
-                    <ItemsCard key={items.id} items={items} />
+                    <ItemsCard key={items.id} items={items} setItemSelected={setItemSelected} />
                 </div>
             ))}
 

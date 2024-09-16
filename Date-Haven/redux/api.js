@@ -7,6 +7,7 @@ export const dates_api = createApi({
         // baseUrl: "https://date-haven.onrender.com",
         baseUrl: "http://localhost:8080",
     }),
+    tagTypes:["review", "comment"],
     endpoints: (builder) => ({
         register: builder.mutation({
             query: (body) => ({
@@ -32,7 +33,8 @@ export const dates_api = createApi({
             query: (id) => ({
                 url: `/api/items/${id}`,
                 method: "GET",
-            })
+            }),
+            providesTags: ["review", "comment"],
         }),
         createReview: builder.mutation ({
             query: ({body, id, token}) => ({
@@ -45,17 +47,25 @@ export const dates_api = createApi({
             })
         }),
         updateReview: builder.mutation ({
-            query: ({body, id}) => ({
+            query: ({body, id, token}) => ({
                 url: `/api/review/${id}`,
                 method: "PUT",
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
                 body,
-            })
+            }),
+            invalidatesTags: ["review"],
         }),
         deleteReview: builder.mutation ({
-            query: (id) => ({
+            query: ({id, token}) => ({
                 url: `/api/review/${id}`,
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
                 method: "DELETE",
-            })
+            }),
+            invalidatesTags: ["review"],
         }),
         createComment: builder.mutation ({
             query: ({body, review_id, token}) => ({
@@ -68,15 +78,21 @@ export const dates_api = createApi({
             })
         }),
         updateComment: builder.mutation ({
-            query: ({body, id}) => ({
+            query: ({body, id, token}) => ({
                 url: `/api/comment/${id}`,
                 method: "PUT",
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
                 body,
             })
         }),
         deleteComment: builder.mutation({
-            query: (id) => ({
+            query: ({id, token}) => ({
                 url: `/api/comment/${id}`,
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
                 method: "DELETE"
             })
         })
