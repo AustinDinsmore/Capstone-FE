@@ -4,8 +4,7 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 export const dates_api = createApi({
     reducerPath: "dates_api",
     baseQuery: fetchBaseQuery({
-        // baseUrl: "https://date-haven.onrender.com",
-        baseUrl: "http://localhost:8080",
+        baseUrl: "https://date-haven.onrender.com",
     }),
     tagTypes:["review", "comment"],
     endpoints: (builder) => ({
