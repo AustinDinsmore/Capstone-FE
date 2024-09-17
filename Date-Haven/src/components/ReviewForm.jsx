@@ -18,6 +18,7 @@ function ReviewForm({ token, item, setReviewEdit, review }) {
 
     const removeReview = async () => {
         await deleteReview({ id: review.id, token });
+        setReviewEdit(null);
     };
 
     const handleChange = async ({ target }) => {
@@ -68,8 +69,8 @@ function ReviewForm({ token, item, setReviewEdit, review }) {
                 <br />
                 <button onClick={handleSubmit}>{review ? "Update" : "Submit"}</button>
                 <br />
-                <button onClick={removeReview}>Delete Review</button>
             </form>
+            <button onClick={removeReview}>Delete Review</button>
         </div>
     );
 };
