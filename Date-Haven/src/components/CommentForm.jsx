@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCreateCommentMutation, useUpdateCommentMutation, useDeleteCommentMutation } from "../../redux/api";
 
-function CommentForm({ token, reviews, comment, setCommentEdit }) {
+function CommentForm({ token, comment, setCommentEdit }) {
     console.log(comment);
     const initialForm = {
         comment: comment?.comment || "",
@@ -13,7 +13,6 @@ function CommentForm({ token, reviews, comment, setCommentEdit }) {
     const [updateComment] = useUpdateCommentMutation();
     const [deleteComment] = useDeleteCommentMutation();
 
-    const location = useLocation();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [form, updateForm] = useState(initialForm);
