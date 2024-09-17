@@ -18,6 +18,10 @@ function CommentForm({ token, reviews, comment, setCommentEdit }) {
     const [error, setError] = useState(null);
     const [form, updateForm] = useState(initialForm);
 
+    const removeComment = async () => {
+        await deleteComment({ id: comment.id, token });
+    };
+
     const handleChange = async ({ target }) => {
         setError(null);
         updateForm({ ...form, [target.name]: target.value });
@@ -30,8 +34,8 @@ function CommentForm({ token, reviews, comment, setCommentEdit }) {
             return;
         }
 
-        const { error } = reviews
-            ? await updateComment({ token, body: form, review_id })
+        const { error } = comment
+            ? await updateComment({ token, body: form, id: comment.id })
             : await createComment({ token, body: form, review_id })
 
         if (error) {
@@ -57,6 +61,8 @@ function CommentForm({ token, reviews, comment, setCommentEdit }) {
                 </label>
                 <br />
                 <button onClick={handleSubmit}>{comment ? "Update" : "Submit"}</button>
+                <br />
+                <button onClick={removeComment}>Remove Comment</button>
             </form>
         </div>
     )

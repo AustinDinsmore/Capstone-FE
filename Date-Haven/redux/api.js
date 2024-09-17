@@ -44,7 +44,8 @@ export const dates_api = createApi({
                     authorization: `Bearer ${token}`,
                 },
                 body,
-            })
+            }),
+            invalidatesTags: ["review"],
         }),
         updateReview: builder.mutation ({
             query: ({body, id, token}) => ({
@@ -75,7 +76,8 @@ export const dates_api = createApi({
                     authorization: `Bearer ${token}`,
                 },
                 body,
-            })
+            }),
+            invalidatesTags: ["comment"],
         }),
         updateComment: builder.mutation ({
             query: ({body, id, token}) => ({
@@ -85,7 +87,8 @@ export const dates_api = createApi({
                     authorization: `Bearer ${token}`,
                 },
                 body,
-            })
+            }),
+            invalidatesTags: ["comment"],
         }),
         deleteComment: builder.mutation({
             query: ({id, token}) => ({
@@ -94,7 +97,8 @@ export const dates_api = createApi({
                     authorization: `Bearer ${token}`,
                 },
                 method: "DELETE"
-            })
+            }),
+            invalidatesTags: ["comment"],
         })
     })
 })
