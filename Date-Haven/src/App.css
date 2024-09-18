@@ -29,7 +29,16 @@ nav>a:hover {
   color: #524741;
 }
 
-.item_card {
+.itemList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.itemCard {
+  display: grid;
   border: 1px solid #252729;
   border-radius: 5%;
+  padding: 15px;
+  background-color: #996959;
 }

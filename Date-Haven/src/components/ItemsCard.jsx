@@ -6,7 +6,7 @@ function ItemsCard({ items }) {
 
     return (
         <NavLink to={`/item/${id}`}>
-            <section>
+            <section className="itemCard">
                 <img src={date} />
                 <h3>
                     Name: {name}

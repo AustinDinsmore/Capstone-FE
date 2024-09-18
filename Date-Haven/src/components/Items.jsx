@@ -30,11 +30,13 @@ function ItemList() {
             <h2>Date Ideas</h2>
             {isLoading ? <p>Loading...</p> : <span />}
             {error ? <p>Ooops! Something went wrong!</p> : <span />}
-            {data.allItems && data.allItems.map((items) => (
-                <div className="item_card" key={items.id}>
-                    <ItemsCard key={items.id} items={items} setItemSelected={setItemSelected} />
-                </div>
-            ))}
+            <div className="itemList">
+                {data.allItems && data.allItems.map((items) => (
+                    <div className="itemList_div" key={items.id}>
+                        <ItemsCard key={items.id} items={items} setItemSelected={setItemSelected} />
+                    </div>
+                ))}
+            </div>
 
         </section>
     );
